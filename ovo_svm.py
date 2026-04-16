@@ -1,9 +1,20 @@
+import os
+
 import pandas as pd
 from matplotlib import pyplot as plt
 
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+
+from datetime import datetime
+
+os.makedirs("results", exist_ok=True)
+
+now = datetime.now()
+date_now = now.strftime("%d/%m/%Y %H:%M:%S")
+cm_file_name = now.strftime("%d%m_%H%M")
+
 
 # Load the dataset
 df = pd.read_csv('data/hand_data.csv')
@@ -28,4 +39,5 @@ posture_names = ['Open', 'Closed', 'Thumb', 'Pinch', 'Almost', 'Trash', 'Point']
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=posture_names)
 disp.plot(cmap=plt.cm.Blues)
 plt.title(f'Confusion Matrix - OVO - Accuracy = {accuracy}%')
+plt.savefig(f'results/{cm_file_name}_ovo')
 plt.show()
