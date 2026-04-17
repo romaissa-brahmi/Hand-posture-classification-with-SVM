@@ -8,8 +8,8 @@ DATABASE_FOLDER = "data/images"
 FILE_NAME = 'data/hand_data.csv'
 
 
-LABEL = 6  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point, 7: background???
-START_INDEX = 566
+LABEL = 0  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point, 7: background???
+START_INDEX = 669
 
 
 def collect_data():
