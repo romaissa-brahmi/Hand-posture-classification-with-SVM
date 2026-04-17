@@ -8,8 +8,8 @@ DATABASE_FOLDER = "data/images"
 FILE_NAME = 'data/hand_data.csv'
 
 
-LABEL = 4  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point, 7: background???
-START_INDEX = 771
+LABEL = 6  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point, 7: background???
+START_INDEX = 566
 
 
 def collect_data():
@@ -39,17 +39,13 @@ def collect_data():
             for hand_landmarks in results.multi_hand_landmarks:
                 mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-                # get lm0
-                wrist = hand_landmarks.landmark[0]
-
-                # normalize based on the wrist
                 data_row = []
 
                 data_row.append(image_index)
                 data_row.append(LABEL)
 
                 for lm in hand_landmarks.landmark:
-                    data_row.extend([lm.x - wrist.x, lm.y - wrist.y, lm.z - wrist.z])
+                    data_row.extend([lm.x, lm.y, lm.z])
 
                 key = cv2.waitKey(1)
                 if key == ord('s'):
@@ -57,7 +53,7 @@ def collect_data():
                         writer = csv.writer(f)
                         writer.writerow(data_row)
                     print(f"Image sauvegardée. Label n°{LABEL}, index n°{image_index}, nombre d'images = {nb_images}")
-                    cv2.imwrite(f"data/database/{image_index}.png", image_to_save)
+                    cv2.imwrite(f"data/images/{image_index}.png", image_to_save)
 
                     image_index +=1
                     nb_images +=1
