@@ -8,7 +8,7 @@ DATABASE_FOLDER = "data/images"
 FILE_NAME = 'data/hand_data.csv'
 
 
-LABEL = 0  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point, 7: background???
+LABEL = 0  # 0: open, 1: closed, 2: closed_thumb, 3: pinch, 4: almost_pinch, 5: trash, 6: point
 START_INDEX = 669
 
 
@@ -20,6 +20,9 @@ def collect_data():
 
 
     cap = cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
     print(f"Collecting data for Label: {LABEL}")
 
     image_index = START_INDEX

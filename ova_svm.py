@@ -26,7 +26,7 @@ y = df['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=12)
 
 # Initialize the SVM classifier with One-vs-All strategy
-svm_ova = SVC(decision_function_shape='ovr')
+svm_ova = SVC(decision_function_shape='ovr', kernel='linear')
 svm_ova.fit(X_train, y_train)
 
 # Predict and evaluate the One-vs-One model
